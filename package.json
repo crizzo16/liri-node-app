@@ -1,0 +1,20 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "A simple app that uses data from Spotify and Twitter to run some commands as directed by the user",
+  "main": "liri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crizzo16/liri-node-app.git"
+  },
+  "keywords": [],
+  "author": "Celia Rizzo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crizzo16/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/crizzo16/liri-node-app#readme"
+}
