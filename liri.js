@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 let keys = require("./keys.js");
 let request = require("request");
 let Spotify = require("node-spotify-api");
@@ -12,32 +11,28 @@ let input = process.argv[2]; // the command that the user wants to execute
 // This will list all the command possibilities in case you forget
 if (input === "help") {
     console.log("\n***** Commands *****");
-    console.log("* my-tweets");
+    console.log("Items in <> are optional.")
+    console.log("* my-tweets <username>");
     console.log("* spotify-this-song <song title>");
     console.log("* movie-this <movie title>");
-    console.log("* do-what-it-says\n");
+    console.log("* do-what-it-says\n");;
 }
 // This will show your last 20 tweets and when they were created
 else if (input === "my-tweets") {
-    console.log("Functionality coming shortly.");
-
-    if (false) {
-        // Set default username
-        let params = { screen_name: "ohh_celia" };
-        // Overwrite the name if user specifies a screen name
-        if (process.argv[3]) {
-            params = { screen_name: process.argv[3] };
-        }
-        // Get the tweets
-        client.get('statuses/user_timeline', params, function (error, tweets, response) {
-            if (!error) {
-                console.log(tweets);
-            }
-        });
-    }
+    console.log("\n********************");
+    console.log("LAST 20 TWEETS");
+    console.log("********************\n");
+    let username = "criticalrole";
+    // If the user specifies an account, change it to that account
+    if (process.argv[3]) username = process.argv[3];
+    logTweets(username);
 }
 // This will take in a song name and show some information about the song
 else if (input === "spotify-this-song") {
+    console.log("\n********************");
+    console.log("SEARCHING FOR SONG ON SPOTIFY");
+    console.log("********************\n");
+
     // Rickroll the user if they don't enter a song title
     let song_title = "never+gonna+give+you+up";
     // If the user doesn't enter a multi-word title in quotes, grab the full title
@@ -53,7 +48,11 @@ else if (input === "spotify-this-song") {
 }
 // This will show information about a movie
 else if (input === "movie-this") {
-     //If the user doesn't enter a title
+    console.log("\n********************");
+    console.log("SEARCHING FOR MOVIE");
+    console.log("********************\n");
+
+    //If the user doesn't enter a title
     let movieName = "incredibles+2";
     // If the user does't enter a multi-word title in quotes, grab the full title
     if (process.argv.length > 3) {
@@ -84,7 +83,7 @@ else if (input === "movie-this") {
         // Do the appropriate function based on the command
         if (random[num] === "spotify-this-song") {
             spotifySong(random[num + 1]);
-        } 
+        }
         else if (random[num] === "movie-this") {
             getMovie(random[num + 1]);
         }
@@ -92,6 +91,26 @@ else if (input === "movie-this") {
 } else {
     console.log("That is not a command. Use the command 'help' to see a list of all the commands.");
 }
+
+function logTweets(username) {
+    // Set username
+    let params = { screen_name: username };
+    // Get the tweets
+    client.get('statuses/user_timeline', params, function (error, tweets, response) {
+        if (!error) {
+            // Loop through the first 20 tweets
+            for (let i = 0; i < 20; i++) {
+                // If the tweet exists (aka if the user has less than 20 tweets)
+                if (tweets[i]) {
+                    console.log("\n" + tweets[i].created_at);
+                    console.log("--------------------");
+                    console.log(tweets[i].text + "\n");
+                }
+            }
+        }
+    });
+};
+
 
 /**
  * This function searches for a song based on the title and logs it to the console
@@ -163,7 +182,7 @@ function getMovie(movie_title) {
  */
 function logData(command, data) {
     let content = "\n" + command + ": " + data;
-    
+
     fs.appendFile("log.txt", content, function (err) {
         if (err) {
             console.log("Error logging content to log.txt");
