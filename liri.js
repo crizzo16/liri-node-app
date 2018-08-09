@@ -19,12 +19,13 @@ if (input === "help") {
 }
 // This will show your last 20 tweets and when they were created
 else if (input === "my-tweets") {
-    console.log("\n********************");
-    console.log("LAST 20 TWEETS");
-    console.log("********************\n");
+    
     let username = "criticalrole";
     // If the user specifies an account, change it to that account
     if (process.argv[3]) username = process.argv[3];
+    console.log("\n********************");
+    console.log("LAST 20 TWEETS: @" + username);
+    console.log("********************\n");
     logTweets(username);
 }
 // This will take in a song name and show some information about the song
