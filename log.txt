@@ -45,3 +45,4 @@ spotify-this-song: Je ne dirai rien
 spotify-this-song: Dernière danse
 spotify-this-song: Barso Re
 spotify-this-song: Never Gonna Give You Up
+spotify-this-song: American Girl

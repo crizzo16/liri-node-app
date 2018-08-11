@@ -108,6 +108,7 @@ function logTweets(username) {
                     console.log(tweets[i].text + "\n");
                 }
             }
+            logData("my-tweets", "@" + username);
         }
     });
 };
